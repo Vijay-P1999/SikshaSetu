@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { learningModules } from '@/data/modules';
 import { generateModuleQuiz, reassessWithPeers } from '@/lib/gemini';
@@ -8,7 +8,7 @@ import { collection, query, where, getDocs, doc, updateDoc, arrayUnion } from 'f
 import { db } from '@/lib/firebase';
 import { Volume2, VolumeX, CheckCircle, Loader2, BookOpen } from 'lucide-react';
 
-export default function ModulePage() {
+function ModuleContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const { user, userData } = useAuth();
@@ -284,5 +284,20 @@ export default function ModulePage() {
                 </div>
             )}
         </div>
+    );
+}
+
+export default function ModulePage() {
+    return (
+        <Suspense fallback={
+            <div className="container mt-lg flex items-center justify-center" style={{ minHeight: '60vh' }}>
+                <div className="text-center">
+                    <Loader2 size={48} className="animate-spin" style={{ color: 'var(--primary)', margin: '0 auto 1rem' }} />
+                    <p style={{ color: 'var(--text-secondary)' }}>Loading module...</p>
+                </div>
+            </div>
+        }>
+            <ModuleContent />
+        </Suspense>
     );
 }
