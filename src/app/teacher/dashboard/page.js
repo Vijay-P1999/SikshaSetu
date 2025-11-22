@@ -81,8 +81,6 @@ const getPaceColor = (pace) => {
 };
 
 <p style={{ color: 'var(--text-secondary)' }}>Total Students</p>
-            </div >
-
             <div className="card" style={{ textAlign: 'center' }}>
                 <Award size={32} style={{ color: 'var(--secondary)', margin: '0 auto 0.5rem' }} />
                 <h3 style={{ fontSize: '2rem', color: 'var(--secondary)' }}>{classData.averageScore}%</h3>
