@@ -6,7 +6,7 @@
 set -e
 
 # Configuration
-PROJECT_ID="your-gcp-project-id"
+PROJECT_ID="sikshasetu-479009"
 REGION="asia-south1"
 SERVICE_NAME="sikshasetu"
 IMAGE_NAME="gcr.io/${PROJECT_ID}/${SERVICE_NAME}"
