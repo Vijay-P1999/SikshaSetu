@@ -1,6 +1,6 @@
 "use client";
 import Link from 'next/link';
-import { useTheme } from './ThemeProvider';
+import { useTheme } from '@/components/ThemeProvider';
 import { useAuth } from '@/context/AuthContext';
 import { Moon, Sun, LogOut } from 'lucide-react';
 import { useRouter } from 'next/navigation';
