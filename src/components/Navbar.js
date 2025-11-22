@@ -3,10 +3,12 @@ import Link from 'next/link';
 import { useTheme } from './ThemeProvider';
 import { useAuth } from '@/context/AuthContext';
 import { Moon, Sun, LogOut } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
     const { theme, toggleTheme } = useTheme();
-    const { user, login, logout } = useAuth();
+    const { user, logout } = useAuth();
+    const router = useRouter();
 
     return (
         <nav style={{
@@ -59,7 +61,7 @@ export default function Navbar() {
                             </button>
                         </div>
                     ) : (
-                        <button onClick={login} className="btn btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.875rem' }}>
+                        <button onClick={() => router.push('/signin')} className="btn btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.875rem' }}>
                             Sign In
                         </button>
                     )}

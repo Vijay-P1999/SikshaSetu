@@ -79,6 +79,7 @@ export async function generateModuleQuiz(moduleContent, grade, language) {
     const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
     const gradeLevel = parseInt(grade);
     const isPictorial = gradeLevel <= 2;
+    const questionCount = isPictorial ? 5 : (gradeLevel <= 5 ? 8 : 10);
 
     const prompt = `
     Generate a quiz based on this learning module content:
@@ -89,16 +90,20 @@ export async function generateModuleQuiz(moduleContent, grade, language) {
     
     ${isPictorial ? `
     For Grade 1-2 students:
-    - Create 3 multiple-choice questions with emojis and simple words
+    - Create ${questionCount} multiple-choice questions with emojis and simple words
     - Use VERY simple language
     - Include visual elements (emojis)
     - Make questions fun and engaging
+    - Each question should have 3-4 options
     ` : `
     For Grade 3+ students:
-    - Create 5 questions with mixed types:
-      * 3 multiple-choice questions
-      * 1 short answer question (2-3 lines)
-      * 1 paragraph question (4-5 lines)
+    - Create ${questionCount} questions with mixed types:
+      * ${Math.floor(questionCount * 0.6)} multiple-choice questions (4 options each)
+      * ${Math.floor(questionCount * 0.2)} short answer questions (2-3 lines)
+      * ${Math.floor(questionCount * 0.2)} paragraph questions (4-5 lines)
+    - Questions should test understanding, not just memory
+    - Include application-based questions
+    - Vary difficulty from easy to challenging
     `}
     
     Return in this JSON format:

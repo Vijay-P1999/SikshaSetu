@@ -1,12 +1,14 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
+import { useRoleProtection } from '@/hooks/useRoleProtection';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { TrendingUp, Award, BookOpen, Clock, Brain, Target } from 'lucide-react';
 
 export default function ParentDashboard() {
     const { user } = useAuth();
+    const { loading: roleLoading } = useRoleProtection(['parent']);
     const [children, setChildren] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -15,7 +17,6 @@ export default function ParentDashboard() {
             if (!user) return;
 
             try {
-                // Query students where parentEmail matches the logged-in user's email
                 const q = query(
                     collection(db, "users"),
                     where("role", "==", "student"),
@@ -39,7 +40,6 @@ export default function ParentDashboard() {
         fetchChildren();
     }, [user]);
 
-    // Dummy data for demonstration when no children found
     const dummyChild = {
         name: "Sample Student",
         grade: 5,
@@ -69,7 +69,7 @@ export default function ParentDashboard() {
 
     const displayChildren = children.length > 0 ? children : [dummyChild];
 
-    if (loading) {
+    if (roleLoading || loading) {
         return (
             <div className="container mt-lg flex items-center justify-center" style={{ minHeight: '60vh' }}>
                 <div className="text-center">

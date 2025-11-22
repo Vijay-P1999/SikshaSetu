@@ -1,39 +1,43 @@
 import Link from 'next/link';
+import { GraduationCap, BookOpen, Users } from 'lucide-react';
 
 export default function Home() {
   return (
-    <main className="container">
-      <div className="hero flex flex-col items-center justify-center mt-lg gap-lg" style={{ minHeight: '80vh' }}>
-        <h1 style={{ fontSize: '3.5rem', fontWeight: '800', color: 'var(--primary)', textAlign: 'center' }}>
+    <div className="container flex flex-col items-center justify-center" style={{ minHeight: '80vh' }}>
+      <div style={{ textAlign: 'center', maxWidth: '800px' }}>
+        <h1 style={{ fontSize: '3.5rem', fontWeight: '800', color: 'var(--primary)', marginBottom: '1rem' }}>
           SikshaSetu
         </h1>
-        <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '600px' }} className="text-center">
-          Bridging the gap in foundational learning. Personalized, AI-powered education for every student.
+        <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', marginBottom: '3rem' }}>
+          AI-powered learning platform for foundational education in Indian government schools
         </p>
 
-        <div className="flex gap-lg justify-center flex-wrap" style={{ marginTop: '3rem', width: '100%' }}>
-          <Link href="/student/onboarding" className="card flex flex-col items-center gap-md" style={{ textDecoration: 'none', width: '280px', cursor: 'pointer', transition: 'transform 0.2s' }}>
-            <div style={{ fontSize: '3rem' }}>🎓</div>
-            <h2 style={{ color: 'var(--text-primary)' }}>Student</h2>
-            <p className="text-center" style={{ color: 'var(--text-secondary)' }}>Start your learning journey</p>
-            <span className="btn btn-primary" style={{ width: '100%' }}>Get Started</span>
+        <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', marginTop: '3rem' }}>
+          <Link href="/signin" className="card" style={{ padding: '2rem', textAlign: 'center', textDecoration: 'none', color: 'inherit' }}>
+            <GraduationCap size={48} style={{ color: 'var(--primary)', margin: '0 auto 1rem' }} />
+            <h3>Student</h3>
+            <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginTop: '0.5rem' }}>
+              Start your learning journey
+            </p>
           </Link>
 
-          <Link href="/teacher/dashboard" className="card flex flex-col items-center gap-md" style={{ textDecoration: 'none', width: '280px', cursor: 'pointer', transition: 'transform 0.2s' }}>
-            <div style={{ fontSize: '3rem' }}>👩‍🏫</div>
-            <h2 style={{ color: 'var(--text-primary)' }}>Teacher</h2>
-            <p className="text-center" style={{ color: 'var(--text-secondary)' }}>Track class progress</p>
-            <span className="btn btn-secondary" style={{ width: '100%' }}>Login</span>
+          <Link href="/signin" className="card" style={{ padding: '2rem', textAlign: 'center', textDecoration: 'none', color: 'inherit' }}>
+            <BookOpen size={48} style={{ color: 'var(--secondary)', margin: '0 auto 1rem' }} />
+            <h3>Teacher</h3>
+            <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginTop: '0.5rem' }}>
+              Monitor student progress
+            </p>
           </Link>
 
-          <Link href="/parent/dashboard" className="card flex flex-col items-center gap-md" style={{ textDecoration: 'none', width: '280px', cursor: 'pointer', transition: 'transform 0.2s' }}>
-            <div style={{ fontSize: '3rem' }}>👨‍👩‍👧</div>
-            <h2 style={{ color: 'var(--text-primary)' }}>Parent</h2>
-            <p className="text-center" style={{ color: 'var(--text-secondary)' }}>Monitor your child</p>
-            <span className="btn btn-primary" style={{ width: '100%', backgroundColor: 'var(--accent)', borderColor: 'var(--accent)' }}>Login</span>
+          <Link href="/signin" className="card" style={{ padding: '2rem', textAlign: 'center', textDecoration: 'none', color: 'inherit' }}>
+            <Users size={48} style={{ color: 'var(--accent)', margin: '0 auto 1rem' }} />
+            <h3>Parent</h3>
+            <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginTop: '0.5rem' }}>
+              Track your child's growth
+            </p>
           </Link>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
